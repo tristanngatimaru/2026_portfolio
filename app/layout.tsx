@@ -1,11 +1,17 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import { Geist } from "next/font/google";
+import { cn } from "@/lib/utils";
+
+const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 const vcrjp = localFont({
   src: "../public/fonts/vcr-jp.ttf",
   variable: "--font-vcr-jp",
 });
+
+
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -20,7 +26,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${vcrjp.variable} h-full antialiased scroll-smooth!`}
+      className={cn("h-full", "antialiased", "scroll-smooth!", vcrjp.variable, "font-sans", geist.variable)}
     >
       <body className="min-h-full flex flex-col">{children}</body>
     </html>
