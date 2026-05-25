@@ -1,16 +1,17 @@
+/* eslint-disable react/no-unescaped-entities */
 "use client";
-
+import Card from "./components/card";
+import TechStack from "./pages/techStack";
 import NavBar from "./components/navBar";
-import RotatingText from "@/components/RotatingText";
+import RotatingText from "./components/rotatingtext";
 import { useInView } from "react-intersection-observer";
 import {
   FaFacebookF,
   FaInstagram,
   FaLinkedinIn,
   FaGithub,
-  FaYoutube,
-  FaTiktok,
 } from "react-icons/fa";
+import MiniNavBar from "./components/MiniNavBar";
 
 export default function Home() {
   const { ref: homeRef, inView: homeInView } = useInView({ threshold: 0.3 });
@@ -42,26 +43,31 @@ export default function Home() {
               ? "contact"
               : "home";
   return (
-    <div className="w-full dark:bg-white flex flex-col items-center justify-center">
+    <div className="w-full  flex flex-col items-center justify-center">
       {/*navbar*/}
 
-      <NavBar activeSection={activeSection} />
+      <div className="hidden lg:block">
+        <NavBar activeSection={activeSection} />
+      </div>
+      <div className="flex lg:hidden z-10 w-full justify-end pt-10 pr-10 ">
+        <MiniNavBar />
+      </div>
 
       {/*header*/}
 
-      <div ref={homeRef} id="home" className="h-screen w-full bg-white flex">
+      <div ref={homeRef} id="home" className="h-screen w-full  flex ">
         {/*Main Title Sequence*/}
-        <div className="w-full flex justify-end pt-32 pr-32">
+        <div className="w-full flex justify-center lg:justify-end pt-40 lg:pt-20 lg:pr-20">
           <div className="w-fit ">
-            <h1 className=" w-auto text-[40px] font-seg font-light pl-2 leading-8">
+            <h1 className=" w-auto text-[18px] lg:text-[32px] font-seg font-light lg:pl-2 leading-0 lg:leading-8">
               TRISTAN FISHER
             </h1>
-            <h1 className="lg:text-[128px] font-seg font-bold leading-28">
+            <h1 className="text-[50px] lg:text-[96px] font-seg font-bold leading-15 lg:leading-28">
               PORTFOLIO
             </h1>
             <div className="flex">
               <RotatingText
-                className="w-full text-left pl-2 font-seg font-light text-[40px] text-nowrap"
+                className="w-full text-left lg:pl-2 font-seg font-light text-[18px] lg:text-[32px] text-nowrap"
                 texts={[
                   "WEB DEVELOPMENT",
                   "GRAPHIC DESIGN",
@@ -81,8 +87,8 @@ export default function Home() {
                 auto
                 loop
               />
-              <h1 className=" text-right pr-2 font-seg font-light text-[40px]">
-                2026
+              <h1 className=" text-right lg:pr-2 font-seg font-light text-[18px] lg:text-[32px]">
+                {new Date().getFullYear()}
               </h1>
             </div>
             <div className="pt-2 flex gap-4 text-2xl">
@@ -98,12 +104,12 @@ export default function Home() {
 
       {/*About*/}
 
-      <div ref={aboutRef} id="about" className="h-screen w-full white">
-     
-        <div className=" flex items-end justify-end right-0 w-full">
-          
-          <div className="flex-col w-1/2 text-right pr-32 font-seg font-light text-2xl">
-          <h1 className="font-safira text-5xl pb-10 pt-32">Kia Ora, I'm Tristan</h1>
+      <div ref={aboutRef} id="about" className="h-auto w-full ">
+        <div className=" flex items-center justify-center lg:items-end lg:justify-end right-0 w-full">
+          <div className="flex-col p-5 lg:p-0 lg:w-1/2 text-center lg:text-right lg:pr-20 font-seg font-light text-xl">
+            <h1 className="font-safira text-4xl pb-10 pt-20">
+              Kia Ora, I'm Tristan
+            </h1>
             <div className="pb-10">
               I am a web developer, graphic designer, programmer, DJ, and music
               producer currently working within my iwi as Web Developer and GIS
@@ -126,9 +132,7 @@ export default function Home() {
             <div className="pb-10">
               Beyond development, music and creative expression remain a huge
               part of who I am — from DJing and music production to visual
-              design and experimental projects. This portfolio reflects that
-              blend of disciplines and the projects that continue to shape my
-              creative and technical journey.
+              design and experimental projects.
             </div>
           </div>
         </div>
@@ -138,17 +142,14 @@ export default function Home() {
       <div
         ref={techStackRef}
         id="tech-stack"
-        className="h-screen w-full bg-blue-950"
+        className="h-auto w-full bg-white lg:pr-20 pt-20 pb-20"
       >
-        <h1>TECH STACK</h1>
+        <TechStack />
       </div>
       {/*Projects split top 2-4 projects with impact/results, and other work as optional grid*/}
-      <div
-        ref={projectsRef}
-        id="projects"
-        className="h-screen w-full bg-red-950"
-      >
+      <div ref={projectsRef} id="projects" className="h-auto w-full bg-red-100">
         <h1>PROJECTS</h1>
+        <Card />
       </div>
       {/*Graphic Design*/}
       <div
