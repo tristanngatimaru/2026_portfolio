@@ -49,7 +49,7 @@ export default function Home() {
       <div className="hidden lg:block">
         <NavBar activeSection={activeSection} />
       </div>
-      <div className="flex lg:hidden z-10 w-full justify-end pt-5 pr-5 ">
+      <div className="flex lg:hidden z-10 w-full  ">
         <MiniNavBar />
       </div>
 
