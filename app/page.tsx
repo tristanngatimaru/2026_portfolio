@@ -49,7 +49,7 @@ export default function Home() {
       <div className="hidden lg:block">
         <NavBar activeSection={activeSection} />
       </div>
-      <div className="flex lg:hidden z-10 w-full justify-end pt-10 pr-10 ">
+      <div className="flex lg:hidden z-10 w-full justify-end pt-5 pr-5 ">
         <MiniNavBar />
       </div>
 
@@ -57,17 +57,17 @@ export default function Home() {
 
       <div ref={homeRef} id="home" className="h-screen w-full  flex ">
         {/*Main Title Sequence*/}
-        <div className="w-full flex justify-center lg:justify-end pt-40 lg:pt-20 lg:pr-20">
-          <div className="w-fit ">
-            <h1 className=" w-auto text-[18px] lg:text-[32px] font-seg font-light lg:pl-2 leading-0 lg:leading-8">
+        <div className=" w-full flex justify-center lg:justify-end pt-40 lg:pt-20 lg:pr-20">
+          <div className=" w-fit ">
+            <h1 className="select-none w-auto text-[18px] lg:text-[32px] font-seg font-light lg:pl-2 leading-0 lg:leading-8">
               TRISTAN FISHER
             </h1>
-            <h1 className="text-[50px] lg:text-[96px] font-seg font-bold leading-15 lg:leading-28">
+            <h1 className="select-none text-[50px] lg:text-[96px] font-seg font-bold leading-15 lg:leading-28">
               PORTFOLIO
             </h1>
             <div className="flex">
               <RotatingText
-                className="w-full text-left lg:pl-2 font-seg font-light text-[18px] lg:text-[32px] text-nowrap"
+                className="select-none w-full text-left lg:pl-2 font-seg font-light text-[18px] lg:text-[32px] text-nowrap"
                 texts={[
                   "WEB DEVELOPMENT",
                   "GRAPHIC DESIGN",
@@ -87,7 +87,7 @@ export default function Home() {
                 auto
                 loop
               />
-              <h1 className=" text-right lg:pr-2 font-seg font-light text-[18px] lg:text-[32px]">
+              <h1 className="select-none text-right lg:pr-2 font-seg font-light text-[18px] lg:text-[32px]">
                 {new Date().getFullYear()}
               </h1>
             </div>
