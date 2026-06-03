@@ -10,6 +10,7 @@ function MiniNavBar() {
     <div className="w-full flex justify-end">
       <button
         onClick={handleClick}
+        style={{ zIndex: 9999 }}
         className={`fixed mt-5 mr-5
         cursor-pointer
         w-20 h-20

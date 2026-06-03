@@ -3,7 +3,7 @@ import { motion } from "motion/react";
 
 function NavBar({ activeSection }: { activeSection: string }) {
   return (
-    <div className="fixed top-1/2  left-20 self-start ">
+    <div className="fixed top-1/2 left-20 self-start" style={{ zIndex: 9999 }}>
       <ul className="flex flex-col gap-4">
         <li>
           <motion.a

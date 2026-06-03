@@ -1,5 +1,8 @@
 /* eslint-disable react/no-unescaped-entities */
 "use client";
+
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "motion/react";
 import Card from "./components/card";
 import TechStack from "./pages/techStack";
 import NavBar from "./components/navBar";
@@ -12,8 +15,24 @@ import {
   FaGithub,
 } from "react-icons/fa";
 import MiniNavBar from "./components/MiniNavBar";
+import { InfiniteScrollRow } from "./components/background";
+import sky from "../public/images/background_parallax/sky/1.png";
+import cloud2 from "../public/images/background_parallax/sky/2.png";
+import cloud3 from "../public/images/background_parallax/sky/3.png";
+import cloud4 from "../public/images/background_parallax/sky/4.png";
+import cloud5 from "../public/images/background_parallax/sky/5.png";
 
 export default function Home() {
+  const heroRef = useRef<HTMLDivElement>(null);
+
+  const { scrollYProgress } = useScroll({});
+
+  const up1 = useTransform(scrollYProgress, [0, 1], ["0%", `-10%`]);
+  const up2 = useTransform(scrollYProgress, [0, 1], ["0%", `-20%`]);
+  const up3 = useTransform(scrollYProgress, [0, 1], ["0%", `-30%`]);
+  const up4 = useTransform(scrollYProgress, [0, 1], ["0%", `-40%`]);
+  const up5 = useTransform(scrollYProgress, [0, 1], ["0%", `-50%`]);
+
   const { ref: homeRef, inView: homeInView } = useInView({ threshold: 0.3 });
   const { ref: aboutRef, inView: aboutInView } = useInView({ threshold: 0.3 });
   const { ref: techStackRef, inView: techStackInView } = useInView({
@@ -43,21 +62,44 @@ export default function Home() {
               ? "contact"
               : "home";
   return (
-    <div className="w-full  flex flex-col items-center justify-center">
+    <div className="w-full  flex flex-col items-center justify-center overflow-hidden text-white">
       {/*navbar*/}
 
       <div className="hidden lg:block">
         <NavBar activeSection={activeSection} />
       </div>
-      <div className="flex lg:hidden z-10 w-full  ">
+      <div className="flex lg:hidden w-full">
         <MiniNavBar />
       </div>
 
       {/*header*/}
 
-      <div ref={homeRef} id="home" className="h-screen w-full  flex ">
+      <div
+        ref={(el) => {
+          heroRef.current = el;
+          homeRef(el);
+        }}
+        id="home"
+        className="relative h-screen w-full flex"
+      >
+        <motion.div className="fixed inset-0 -z-10">
+          <InfiniteScrollRow image={sky} duration={200} />
+        </motion.div>
+        <motion.div style={{ y: up4 }} className="fixed inset-0 -z-10">
+          <InfiniteScrollRow image={cloud2} duration={150} />
+        </motion.div>
+        <motion.div style={{ y: up1 }} className="fixed inset-0 -z-10">
+          <InfiniteScrollRow image={cloud3} duration={140} />
+        </motion.div>
+        <motion.div style={{ y: up2 }} className="fixed inset-0 -z-10">
+          <InfiniteScrollRow image={cloud4} duration={130} />
+        </motion.div>
+        <motion.div className="fixed inset-0 -z-10">
+          <InfiniteScrollRow image={cloud5} duration={120} />
+        </motion.div>
+
         {/*Main Title Sequence*/}
-        <div className=" w-full flex justify-center lg:justify-end pt-40 lg:pt-20 lg:pr-20">
+        <div className="relative z-50 w-full h-full flex justify-center lg:justify-end pt-40 lg:pt-20 lg:pr-20">
           <div className=" w-fit ">
             <h1 className="select-none w-auto text-[18px] lg:text-[32px] font-seg font-light lg:pl-2 leading-0 lg:leading-8">
               TRISTAN FISHER
@@ -74,7 +116,7 @@ export default function Home() {
                   "MUSIC PRODUCTION",
                   "SOFTWARE DEVELOPMENT",
                 ]}
-                mainClassName="  text-black overflow-hidden justify-center"
+                mainClassName="  text-white overflow-hidden justify-center"
                 staggerFrom="first"
                 initial={{ y: "100%" }}
                 animate={{ y: 0 }}
@@ -142,12 +184,12 @@ export default function Home() {
       <div
         ref={techStackRef}
         id="tech-stack"
-        className="h-auto w-full bg-white lg:pr-20 pt-20 pb-20"
+        className="h-auto w-full  lg:pr-20 pt-20 pb-20"
       >
         <TechStack />
       </div>
       {/*Projects split top 2-4 projects with impact/results, and other work as optional grid*/}
-      <div ref={projectsRef} id="projects" className="h-auto w-full bg-red-100">
+      <div ref={projectsRef} id="projects" className="h-auto w-full ">
         <h1>PROJECTS</h1>
         <Card />
       </div>

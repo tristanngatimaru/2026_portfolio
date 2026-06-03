@@ -14,6 +14,7 @@ import {
   SiStrapi,
 } from "react-icons/si";
 import ableton from "@/public/abletonlive-svgrepo-com.svg";
+import Image, { StaticImageData } from "next/image";
 import { IconType } from "react-icons/lib";
 import { useInView } from "react-intersection-observer";
 import { motion } from "motion/react";
@@ -26,13 +27,42 @@ function IconItem({ item: Icon, name, skillLevel }: IconItemProps) {
     <div ref={ref} className="flex items-center gap-3">
       <Icon
         size={40}
-        className="shrink-0 duration-100 ease-in-out hover:scale-125"
+        className="shrink-0 duration-100 ease-in-out hover:scale-125 text-white"
       />
       <div className="flex flex-col w-full">
-        <span className="text-sm mb-1">{name}</span>
-        <div className="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
+        <span className="text-sm mb-1 text-white">{name}</span>
+        <div className="w-full h-2 bg-mauve-600 rounded-full overflow-hidden">
           <motion.div
-            className="h-full bg-blue-950 rounded-full"
+            className="h-full bg-white rounded-full"
+            initial={{ width: 0 }}
+            animate={{ width: inView ? `${skillLevel}%` : 0 }}
+            transition={{ type: "spring", damping: 20, stiffness: 500 }}
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+type SvgItemProps = { item: StaticImageData; name: string; skillLevel: number };
+
+function SvgIconItem({ item, name, skillLevel }: SvgItemProps) {
+  const { ref, inView } = useInView({ threshold: 0.1, triggerOnce: false });
+  return (
+    <div ref={ref} className="flex items-center gap-3">
+      <Image
+      
+        src={item}
+        alt={name}
+        width={40}
+        height={40}
+        className="shrink-0 duration-100 ease-in-out hover:scale-125 invert"
+      />
+      <div className="flex flex-col w-full">
+        <span className="text-sm mb-1 text-white">{name}</span>
+        <div className="w-full h-2 bg-mauve-600 rounded-full overflow-hidden">
+          <motion.div
+            className="h-full bg-white rounded-full"
             initial={{ width: 0 }}
             animate={{ width: inView ? `${skillLevel}%` : 0 }}
             transition={{ type: "spring", damping: 20, stiffness: 500 }}
@@ -71,6 +101,9 @@ function TechStack() {
       <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 w-full px-10 lg:px-0 lg:w-1/2">
         {iconItems.map((props) => (
           <IconItem key={props.name} {...props} />
+        ))}
+        {svgItems.map((props) => (
+          <SvgIconItem key={props.name} {...props} />
         ))}
       </div>
     </div>
