@@ -51,7 +51,6 @@ function SvgIconItem({ item, name, skillLevel }: SvgItemProps) {
   return (
     <div ref={ref} className="flex items-center gap-3">
       <Image
-      
         src={item}
         alt={name}
         width={40}

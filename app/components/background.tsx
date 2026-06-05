@@ -5,16 +5,18 @@ export interface BackgroundLayer {
   duration?: number; // seconds
 }
 
-const COPIES = 8; // how many copies to fill the viewport seamlessly
+const COPIES = 4; // how many copies to fill the viewport seamlessly
 
 interface InfiniteScrollRowProps {
   image: StaticImageData;
   duration?: number; // seconds
+  paused?: boolean;
 }
 
 export function InfiniteScrollRow({
   image,
   duration = 19,
+  paused = false,
 }: InfiniteScrollRowProps) {
   const aspectRatio = image.width / image.height;
   const tiles = Array.from({ length: COPIES }, (_, i) => i);
@@ -22,7 +24,7 @@ export function InfiniteScrollRow({
     <div className="overflow-hidden w-full h-full">
       <div
         className="flex h-full w-max"
-        style={{ animation: `infinite-scroll ${duration}s linear infinite` }}
+        style={{ animation: `infinite-scroll ${duration}s linear infinite`, animationPlayState: paused ? "paused" : "running", willChange: "transform" }}
       >
         {tiles.map((i) => (
           <div

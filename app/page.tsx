@@ -1,9 +1,10 @@
 /* eslint-disable react/no-unescaped-entities */
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "motion/react";
-import Card from "./components/card";
+import PausePlay from "./components/PausePlay";
+import Projects from "./pages/Projects";
 import TechStack from "./pages/techStack";
 import NavBar from "./components/navBar";
 import RotatingText from "./components/rotatingtext";
@@ -21,17 +22,16 @@ import cloud2 from "../public/images/background_parallax/sky/2.png";
 import cloud3 from "../public/images/background_parallax/sky/3.png";
 import cloud4 from "../public/images/background_parallax/sky/4.png";
 import cloud5 from "../public/images/background_parallax/sky/5.png";
+import GraphicDesign from "./pages/GraphicDesign";
 
 export default function Home() {
   const heroRef = useRef<HTMLDivElement>(null);
-
+  const [isPlaying, setIsPlaying] = useState(true);
   const { scrollYProgress } = useScroll({});
 
-  const up1 = useTransform(scrollYProgress, [0, 1], ["0%", `-10%`]);
-  const up2 = useTransform(scrollYProgress, [0, 1], ["0%", `-20%`]);
-  const up3 = useTransform(scrollYProgress, [0, 1], ["0%", `-30%`]);
-  const up4 = useTransform(scrollYProgress, [0, 1], ["0%", `-40%`]);
-  const up5 = useTransform(scrollYProgress, [0, 1], ["0%", `-50%`]);
+  const up1 = useTransform(scrollYProgress, [0, 1], ["50%", `-10%`]);
+  const up2 = useTransform(scrollYProgress, [0, 1], ["20%", `-20%`]);
+  const up4 = useTransform(scrollYProgress, [0, 1], ["40%", `-40%`]);
 
   const { ref: homeRef, inView: homeInView } = useInView({ threshold: 0.3 });
   const { ref: aboutRef, inView: aboutInView } = useInView({ threshold: 0.3 });
@@ -65,7 +65,7 @@ export default function Home() {
     <div className="w-full  flex flex-col items-center justify-center overflow-hidden text-white">
       {/*navbar*/}
 
-      <div className="hidden lg:block">
+      <div className="hidden lg:block ">
         <NavBar activeSection={activeSection} />
       </div>
       <div className="flex lg:hidden w-full">
@@ -73,6 +73,12 @@ export default function Home() {
       </div>
 
       {/*header*/}
+      <div className="fixed top-20 left-20 z-9999">
+        <PausePlay
+          isPlaying={isPlaying}
+          onToggle={() => setIsPlaying(!isPlaying)}
+        />
+      </div>
 
       <div
         ref={(el) => {
@@ -83,20 +89,39 @@ export default function Home() {
         className="relative h-screen w-full flex"
       >
         <motion.div className="fixed inset-0 -z-10">
-          <InfiniteScrollRow image={sky} duration={200} />
-        </motion.div>
-        <motion.div style={{ y: up4 }} className="fixed inset-0 -z-10">
-          <InfiniteScrollRow image={cloud2} duration={150} />
+          <InfiniteScrollRow image={sky} duration={200} paused={!isPlaying} />
         </motion.div>
         <motion.div style={{ y: up1 }} className="fixed inset-0 -z-10">
-          <InfiniteScrollRow image={cloud3} duration={140} />
+          <InfiniteScrollRow
+            image={cloud2}
+            duration={150}
+            paused={!isPlaying}
+          />
         </motion.div>
         <motion.div style={{ y: up2 }} className="fixed inset-0 -z-10">
-          <InfiniteScrollRow image={cloud4} duration={130} />
+          <InfiniteScrollRow
+            image={cloud3}
+            duration={140}
+            paused={!isPlaying}
+          />
         </motion.div>
-        <motion.div className="fixed inset-0 -z-10">
-          <InfiniteScrollRow image={cloud5} duration={120} />
+        <motion.div style={{ y: up4 }} className="fixed inset-0 -z-10">
+          <InfiniteScrollRow
+            image={cloud4}
+            duration={130}
+            paused={!isPlaying}
+          />
         </motion.div>
+        <motion.div className="fixed inset-0 z-50 pointer-events-none drop-shadow-2xl">
+          <InfiniteScrollRow
+            image={cloud5}
+            duration={120}
+            paused={!isPlaying}
+          />
+        </motion.div>
+
+        {/* dark overlay between background and content */}
+        <div className="fixed inset-0 bg-black/20 -z-[5] pointer-events-none" />
 
         {/*Main Title Sequence*/}
         <div className="relative z-50 w-full h-full flex justify-center lg:justify-end pt-40 lg:pt-20 lg:pr-20">
@@ -104,7 +129,7 @@ export default function Home() {
             <h1 className="select-none w-auto text-[18px] lg:text-[32px] font-seg font-light lg:pl-2 leading-0 lg:leading-8">
               TRISTAN FISHER
             </h1>
-            <h1 className="select-none text-[50px] lg:text-[96px] font-seg font-bold leading-15 lg:leading-28">
+            <h1 className="drop-shadow-xl select-none text-[50px] lg:text-[96px] font-seg font-bold leading-15 lg:leading-28">
               PORTFOLIO
             </h1>
             <div className="flex">
@@ -134,10 +159,34 @@ export default function Home() {
               </h1>
             </div>
             <div className="pt-2 flex gap-4 text-2xl">
-              <FaFacebookF className="hover:scale-110 duration-100 ease-in-out cursor-pointer" />
-              <FaInstagram className="hover:scale-110 duration-100 ease-in-out cursor-pointer" />
-              <FaLinkedinIn className="hover:scale-110 duration-100 ease-in-out cursor-pointer" />
-              <FaGithub className="hover:scale-110 duration-100 ease-in-out cursor-pointer" />
+              <a
+                href="https://www.facebook.com/Pitchylaroux/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FaFacebookF className="hover:scale-110 duration-100 ease-in-out cursor-pointer" />
+              </a>
+              <a
+                href="https://www.instagram.com/ox_pitchy_xo/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FaInstagram className="hover:scale-110 duration-100 ease-in-out cursor-pointer" />
+              </a>
+              <a
+                href="https://www.linkedin.com/in/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FaLinkedinIn className="hover:scale-110 duration-100 ease-in-out cursor-pointer" />
+              </a>
+              <a
+                href="https://github.com/TristanBaileyFisher"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FaGithub className="hover:scale-110 duration-100 ease-in-out cursor-pointer" />
+              </a>{" "}
             </div>
           </div>
         </div>
@@ -189,17 +238,20 @@ export default function Home() {
         <TechStack />
       </div>
       {/*Projects split top 2-4 projects with impact/results, and other work as optional grid*/}
-      <div ref={projectsRef} id="projects" className="h-auto w-full ">
-        <h1>PROJECTS</h1>
-        <Card />
+      <div
+        ref={projectsRef}
+        id="projects"
+        className="h-auto w-full lg:pr-20 pt-20 pb-20 items-end justify-end flex"
+      >
+        <Projects />
       </div>
       {/*Graphic Design*/}
       <div
         ref={graphicDesignRef}
         id="graphic-design"
-        className="h-screen w-full bg-purple-950"
+        className="h-auto w-full lg:pr-20 pt-20 pb-20 flex justify-end"
       >
-        <h1>GRAPHIC DESIGN</h1>
+        <GraphicDesign />
       </div>
       {/*Contact*/}
       <div

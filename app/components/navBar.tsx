@@ -3,13 +3,16 @@ import { motion } from "motion/react";
 
 function NavBar({ activeSection }: { activeSection: string }) {
   return (
-    <div className="fixed top-1/2 left-20 self-start" style={{ zIndex: 9999 }}>
+    <div
+      className="fixed top-1/2 left-20 self-start pl20"
+      style={{ zIndex: 9999 }}
+    >
       <ul className="flex flex-col gap-4">
         <li>
           <motion.a
             transition={{ type: "spring", damping: 20, stiffness: 300 }}
             animate={{ fontSize: activeSection === "home" ? 52 : 24 }}
-            className=" text-black text-2xl hover:text-gray-700  font-safira"
+            className=" text-white text-2xl hover:text-gray-700  font-safira"
             href="#home"
           >
             Home
@@ -19,7 +22,7 @@ function NavBar({ activeSection }: { activeSection: string }) {
           <motion.a
             transition={{ type: "spring", damping: 20, stiffness: 300 }}
             animate={{ fontSize: activeSection === "about" ? 52 : 24 }}
-            className=" text-black text-2xl hover:text-gray-700 font-safira"
+            className=" text-white text-2xl hover:text-gray-700 font-safira"
             href="#about"
           >
             About
@@ -29,7 +32,7 @@ function NavBar({ activeSection }: { activeSection: string }) {
           <motion.a
             transition={{ type: "spring", damping: 20, stiffness: 300 }}
             animate={{ fontSize: activeSection === "techStack" ? 52 : 24 }}
-            className=" text-black text-2xl hover:text-gray-700 font-safira"
+            className=" text-white text-2xl hover:text-gray-700 font-safira"
             href="#tech-stack"
           >
             Tech Stack
@@ -39,7 +42,7 @@ function NavBar({ activeSection }: { activeSection: string }) {
           <motion.a
             transition={{ type: "spring", damping: 20, stiffness: 300 }}
             animate={{ fontSize: activeSection === "projects" ? 52 : 24 }}
-            className=" text-black text-2xl hover:text-gray-700 font-safira"
+            className=" text-white text-2xl hover:text-gray-700 font-safira"
             href="#projects"
           >
             Projects
@@ -49,7 +52,7 @@ function NavBar({ activeSection }: { activeSection: string }) {
           <motion.a
             transition={{ type: "spring", damping: 20, stiffness: 300 }}
             animate={{ fontSize: activeSection === "graphicDesign" ? 52 : 24 }}
-            className=" text-black text-2xl hover:text-gray-700 font-safira"
+            className=" text-white text-2xl hover:text-gray-700 font-safira"
             href="#graphic-design"
           >
             Graphic Design
@@ -59,7 +62,7 @@ function NavBar({ activeSection }: { activeSection: string }) {
           <motion.a
             transition={{ type: "spring", damping: 20, stiffness: 300 }}
             animate={{ fontSize: activeSection === "contact" ? 52 : 24 }}
-            className=" text-black text-2xl hover:text-gray-700 font-safira"
+            className=" text-white text-2xl hover:text-gray-700 font-safira"
             href="#contact"
           >
             Contact
