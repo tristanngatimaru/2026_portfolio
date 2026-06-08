@@ -242,7 +242,11 @@ const Masonry: React.FC<MasonryProps> = ({
   };
 
   return (
-    <div ref={containerRef} className="relative w-full" style={{ height: totalHeight }}>
+    <div
+      ref={containerRef}
+      className="relative w-full"
+      style={{ height: totalHeight }}
+    >
       {grid.map((item) => (
         <div
           key={item.id}
