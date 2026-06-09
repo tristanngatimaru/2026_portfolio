@@ -1,6 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 "use client";
 
+import ContactMe from "./pages/ContactMe";
 import { useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "motion/react";
 import PausePlay from "./components/PausePlay";
@@ -257,9 +258,9 @@ export default function Home() {
       <div
         ref={contactRef}
         id="contact"
-        className="h-screen w-full bg-pink-950"
+        className="h-screen w-full lg:pr-20 pt-20 pb-20 flex justify-end"
       >
-        <h1>CONTACT</h1>
+        <ContactMe />
       </div>
     </div>
   );
